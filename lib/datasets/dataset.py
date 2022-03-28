@@ -19,17 +19,17 @@ class dataset(Dataset):
         self.std = std
 
     def __getitem__(self, item):
-        hsi = self.read_HSD(os.path.join(self.root, self.hsiList[item]))
+        # hsi = self.read_HSD(os.path.join(self.root, self.hsiList[item]))
         image = cv2.imread(os.path.join(self.root, self.imageList[item]), cv2.IMREAD_COLOR)
         label = cv2.imread(os.path.join(self.root, self.labelList[item]), cv2.IMREAD_GRAYSCALE)
-        gt = cv2.imread(os.path.join(self.root, self.labelList[item]), cv2.IMREAD_GRAYSCALE).transpose(1, 0)[:, ::-1]
+        gt = cv2.imread(os.path.join(self.root, self.gt[item]), cv2.IMREAD_GRAYSCALE)
 
-        image = image.transpose(1, 0, 2)[:, ::-1, :]  # hsicity dataset
+        # image = image.transpose(1, 0, 2)[:, ::-1, :]  # hsicity dataset
 
         h, w = image.shape[0], image.shape[1]
         image = cv2.resize(image, (int(w / 2), int(h / 2)), interpolation=cv2.INTER_NEAREST)
         label = cv2.resize(label, (int(w / 2), int(h / 2)), interpolation=cv2.INTER_NEAREST)
-        hsi = cv2.resize(hsi, (int(w / 2), int(h / 2)), interpolation=cv2.INTER_NEAREST)
+        # hsi = cv2.resize(hsi, (int(w / 2), int(h / 2)), interpolation=cv2.INTER_NEAREST)
         gt = cv2.resize(gt, (int(w / 2), int(h / 2)), interpolation=cv2.INTER_NEAREST)
 
         image = image.astype(np.float32)[:, :, ::-1] / 255.0
@@ -39,7 +39,9 @@ class dataset(Dataset):
 
         image = image.transpose((2, 0, 1))
 
-        return hsi.copy(), image.copy(), label.copy(), gt.copy()
+        # return hsi.copy(), image.copy(), label.copy(), gt.copy()
+
+        return image.copy(), label.copy(), gt.copy()
 
     def __len__(self):
         return len(self.imageList)

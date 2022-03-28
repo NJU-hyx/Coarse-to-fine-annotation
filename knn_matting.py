@@ -20,7 +20,7 @@ def knn_matte(img, trimap, mylambda=100):
     all_constraints = foreground + background
 
     print(time.asctime(time.localtime(time.time())) + ': Finding nearest neighbors')
-    # a, b = np.unravel_index(np.arange(m * n), (m, n))
+    # a, b = np.unravel_index(np.arange(m * n), (m, n)).
     # feature_vec = np.append(np.transpose(img.reshape(m * n, c)), [a, b] / np.sqrt(m * m + n * n), axis=0).T
 
     # feature_vec = np.maximum(img.reshape(m * n, c), 0)

@@ -12,17 +12,19 @@ __pycache__/
 # C extensions
 *.so
 
+#pycharm
+.idea/
+
 # Distribution / packaging
 .Python
-parameters/
 result/
+parameters/
 build/
 develop-eggs/
 dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
 parts/
 sdist/
